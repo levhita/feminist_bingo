@@ -11,18 +11,26 @@ window.onload = function() {
 	const mark = new Image();
 	mark.src = "assets/mark.png";
 
-	canvas.addEventListener('click', function(e){
-		const ratio = 700/window.innerWidth;
-
-		let square_size = Math.floor(window.innerWidth/5*ratio);
+	canvas.addEventListener('click', function(e) {
 		
-		const virtualClickX= Math.floor(e.layerX*ratio);
-		const virtualClickY= Math.floor(e.layerY*ratio);
+		const ratio = 690/window.innerWidth;
+		let square_size = Math.floor( (window.innerWidth)/5*ratio);
+		
+		const clickX = Math.floor(e.layerX*ratio);
+		const clickY = Math.floor(e.layerY*ratio);
 
-		let clickX = virtualClickX-(virtualClickX%(square_size));
-		let clickY = virtualClickY-(virtualClickY%(square_size));
+		let positionX = clickX-(clickX%square_size);
+		let positionY = clickY-(clickY%square_size);
 
-		ctx.drawImage(mark, clickX, clickY);
-	})
+		ctx.drawImage(mark, positionX, positionY);
+		
+	});
+
+	document.getElementById('download').addEventListener('click', function() {
+		var canvas = document.getElementById("canvas");
+		var link = document.getElementById("download_link");
+		link.setAttribute('download', 'bingo.jpg');
+		link.setAttribute('href', canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream"));
+		link.click();
+	});
 }
-
