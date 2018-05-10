@@ -13,11 +13,11 @@ window.onload = function() {
 
 	canvas.addEventListener('click', function(e) {
 		
-		const ratio = 690/window.innerWidth;
-		let square_size = Math.floor( (window.innerWidth)/5*ratio);
+		const ratio = 690/this.offsetWidth;
+		let square_size = Math.floor( (this.offsetWidth)/5*ratio);
 		
-		const clickX = Math.floor(e.layerX*ratio);
-		const clickY = Math.floor(e.layerY*ratio);
+		const clickX = Math.floor((e.layerX-this.offsetLeft)*ratio);
+		const clickY = Math.floor((e.layerY-this.offsetTop)*ratio);
 
 		let positionX = clickX-(clickX%square_size);
 		let positionY = clickY-(clickY%square_size);
